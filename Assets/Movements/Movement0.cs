@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement1 : SharedMovement
+public class Movement0 : SharedMovement
 {
     // Start is called before the first frame update
     void Start()
@@ -14,15 +14,15 @@ public class Movement1 : SharedMovement
     // Update is called once per frame
     void Update()
     {
-        //Only get info if movement is not happening and it is the units turn
-        if (!active && Trait1.defeated == false && turn == Trait1.unitID)
+        //Only get info if movement is not happening, unit is not defeated, and it is the units turn
+        if (!active && Trait0.defeated == false && turn == Trait0.unitID)
         {
             findMovableGround();
             checkClick();
         }
-
+        
         //Show movement when turn is over
-        else if (turn == 0)
+        else if (turn == 1)
         {
             ShowMovement();
         }
@@ -30,8 +30,8 @@ public class Movement1 : SharedMovement
 
     void checkClick()
     {
-        //When input is a right click
-        if (Input.GetMouseButtonUp(1))
+        //When input is a left click
+        if (Input.GetMouseButtonUp(0))
         {
             //Get location of the click  
             Ray input = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -44,14 +44,14 @@ public class Movement1 : SharedMovement
                 if (clickedLocation.collider.tag == "Ground")
                 {
                     //Save the ground that was clicked
-                    Ground g = clickedLocation.collider.GetComponent<Ground>();
+                    Ground g = clickedLocation.collider.GetComponent<Ground>();             
                     //Ensure the ground can be moved to and move to that location and switch turn
                     if (g.moveable)
                     {
                         if (g.range)
                         {
                             MoveUnit(g);
-                            turn=0;
+                            turn++;
                         }
                     }
                 }

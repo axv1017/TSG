@@ -23,6 +23,8 @@ public class GameStatus : MonoBehaviour
             SharedMovement.turn = 0;
             Trait0.defeated = false;
             Trait1.defeated = false;
+            SharedTrait.team0 = 1;
+            SharedTrait.team1 = 1;
         }
     }
 }
