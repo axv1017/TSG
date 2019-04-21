@@ -34,15 +34,19 @@ public class Trait1 : MonoBehaviour
         {
             showText.text = "Game Over\nPlayer Team Wins\nPress Esc. to Exit\nPress Enter to Restart";
         }
-        
+
         if (Trait0.defeated == false)
         {
             if (Input.GetKeyUp(KeyCode.Keypad2))
             {
-                //Send info for combat into function
-                recieveDamage(Trait0.strength);
-                //Sets up text to be shown in gui
-                showText.text = "Unit " + unitID + " Traits\nHP: " + updatedHP + "\nStrength: " + strength;
+                //If in combat range
+                if (SharedTrait.distance == 1)
+                {
+                    //Send info for combat into function
+                    recieveDamage(Trait0.strength);
+                    //Sets up text to be shown in gui
+                    showText.text = "Unit " + unitID + " Traits\nHP: " + updatedHP + "\nStrength: " + strength;
+                }
             }
 
             if (Input.GetKey(KeyCode.Alpha2))

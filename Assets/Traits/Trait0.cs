@@ -39,10 +39,14 @@ public class Trait0 : MonoBehaviour
         {
             if (Input.GetKeyUp(KeyCode.Keypad1))
             {
-                //Send info for combat into function
-                recieveDamage(Trait1.strength);
-                //Sets up text to be shown in gui
-                showText.text = "Unit " + unitID + " Traits\nHP: " + updatedHP + "\nStrength: " + strength;
+                //If in combat range
+                if (SharedTrait.distance == 1)
+                {
+                    //Send info for combat into function
+                    recieveDamage(Trait1.strength);
+                    //Sets up text to be shown in gui
+                    showText.text = "Unit " + unitID + " Traits\nHP: " + updatedHP + "\nStrength: " + strength;
+                }
             }
 
             if (Input.GetKey(KeyCode.Alpha1))
