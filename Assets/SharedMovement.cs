@@ -22,6 +22,8 @@ public class SharedMovement : MonoBehaviour
     public float upwardRange = 2;
     //Units position on top of ground
     float stance = 0;
+    //Whose turn it is
+    public static int turn = 0;
 
     /* 
         Used in error in ShowMovement
@@ -64,6 +66,7 @@ public class SharedMovement : MonoBehaviour
         return Ground;
     }
 
+
     public void makeGroundList()
     {
         //Goes through all ground
@@ -82,7 +85,7 @@ public class SharedMovement : MonoBehaviour
         getSelectedGround();
 
         //Going through the ground
-        Queue<Ground> action = new Queue<Ground>();
+        Queue <Ground> action = new Queue<Ground>();
 
         //Sends selected ground through queue and specifies not to go through it again
         action.Enqueue(selectedGround);
