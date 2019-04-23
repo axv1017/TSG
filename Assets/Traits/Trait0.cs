@@ -37,15 +37,17 @@ public class Trait0 : MonoBehaviour
 
         if (Trait1.defeated == false)
         {
-            if (Input.GetKeyUp(KeyCode.Keypad1))
+            if (Input.GetKey(KeyCode.Keypad1))
             {
-                //If in combat range
-                if (SharedTrait.distance == 1)
+                //If in combat range and the other units turn
+                if (SharedTrait.distance == 1 && SharedMovement.turn == (Trait1.unitID + 0.5))
                 {
                     //Send info for combat into function
                     recieveDamage(Trait1.strength);
                     //Sets up text to be shown in gui
                     showText.text = "Unit " + unitID + " Traits\nHP: " + updatedHP + "\nStrength: " + strength;
+
+                    SharedMovement.turn=0;
                 }
             }
 
@@ -56,7 +58,7 @@ public class Trait0 : MonoBehaviour
 
             if (Input.GetKey(KeyCode.Space))
             {
-                showText.text = "Press 1 for Player(Blue) Traits\n\nPress 2 for Rival(Red) Traits\n\nPress a keypad number to deal damage to the corresponding token\n\nClick a highlighted space to move there\n\nPress Esc.to Exit\n\nPress Enter to Restart\n\nPress Space to show this message again";
+                showText.text = "Press 1 for Player(Blue) Traits\n\nPress 2 for Rival(Red) Traits\n\nPress a keypad number to deal damage to the corresponding token\n\nPress 0 on the keypad to end turn after moving\n\nClick a highlighted space to move there\n\nPress Esc.to Exit\n\nPress Enter to Restart\n\nPress space to show this message again";
             }
         }
     }

@@ -20,11 +20,18 @@ public class Movement0 : SharedMovement
             findMovableGround();
             checkClick();
         }
-        
-        //Show movement when turn is over
-        else if (turn == 1)
+
+        //Start phase 2 of turn
+        else if (turn == (Trait0.unitID + 0.5))
         {
+            //Show the unit in its new position
             ShowMovement();
+
+            //Pressing 0 ends the turn
+            if (Input.GetKeyUp(KeyCode.Keypad0))
+            {
+                turn+=0.5f;
+            }
         }
     }
 
@@ -51,7 +58,7 @@ public class Movement0 : SharedMovement
                         if (g.range)
                         {
                             MoveUnit(g);
-                            turn++;
+                            turn+=0.5f;
                         }
                     }
                 }

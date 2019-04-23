@@ -23,7 +23,7 @@ public class SharedMovement : MonoBehaviour
     //Units position on top of ground
     float stance = 0;
     //Whose turn it is
-    public static int turn = 0;
+    public static float turn = 0;
 
     /* 
         Used in error in ShowMovement

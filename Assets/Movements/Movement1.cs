@@ -21,17 +21,24 @@ public class Movement1 : SharedMovement
             checkClick();
         }
 
-        //Show movement when turn is over
-        else if (turn == 0)
+        //Start phase 2 of turn
+        else if (turn == (Trait1.unitID + 0.5))
         {
+            //Show the unit in its new position
             ShowMovement();
+
+            //Pressing 0 ends the turn
+            if (Input.GetKeyUp(KeyCode.Keypad0))
+            {
+                turn=0;
+            }
         }
     }
 
     void checkClick()
     {
-        //When input is a right click
-        if (Input.GetMouseButtonUp(1))
+        //When input is a left click
+        if (Input.GetMouseButtonUp(0))
         {
             //Get location of the click  
             Ray input = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -51,7 +58,7 @@ public class Movement1 : SharedMovement
                         if (g.range)
                         {
                             MoveUnit(g);
-                            turn=0;
+                            turn+=0.5f;
                         }
                     }
                 }
