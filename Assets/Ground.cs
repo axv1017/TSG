@@ -12,9 +12,13 @@ public class Ground : MonoBehaviour
     public bool newLocation = false;
     //Ground that can be moved to by a unit
     public bool range = false;
+    //Ground that a unit can reach to attack
+    public bool combat = false;
 
     //List of all neighbors for ground
     public List<Ground> neighborList = new List<Ground>();
+    //List of all neighbors for ground that will not exclude occupied ground
+    public List<Ground> combatList = new List<Ground>();
     //Flag that a neighbor has been processed for the above list
     public bool tested = false;
     //Ground that is being processed
@@ -43,6 +47,12 @@ public class Ground : MonoBehaviour
             GetComponent<Renderer>().material.color = Color.cyan;
         }
 
+        //Makes the ground a unit can reach to attack another unit red
+        else if (combat)
+        {
+            GetComponent<Renderer>().material.color = Color.red;
+        }
+
         //Makes all ground not involved in the above scenarios clear which would show the default color
         else
         {
@@ -57,6 +67,7 @@ public class Ground : MonoBehaviour
         currentLocation = false;
         newLocation = false;
         range = false;
+        combat = false;
 
         neighborList.Clear();
         tested = false;
@@ -92,6 +103,9 @@ public class Ground : MonoBehaviour
             //If ground is found and is movable
             if (Ground != null && Ground.moveable)
             {
+                //Makes list of ground for combat without the below restrictions on occupied spaces
+                combatList.Add(Ground);
+
                 //Used to find if unit is on ground
                 RaycastHit occupied;
 

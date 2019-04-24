@@ -20,6 +20,8 @@ public class SharedMovement : MonoBehaviour
     public int unitRange = 2;
     //How far up (and down) to search for ground
     public float upwardRange = 2;
+    //How far a unit can attack from
+    public int combatRange = 1;
     //Units position on top of ground
     float stance = 0;
     //Whose turn it is
@@ -107,6 +109,54 @@ public class SharedMovement : MonoBehaviour
             {
                 //Adds neighbors to queue
                 foreach (Ground Ground in g.neighborList)
+                {
+                    //Ensures ground does not go through more than once
+                    if (!Ground.tested)
+                    {
+                        //Tracks ground
+                        Ground.selected = g;
+                        //Specify that we have looked at this ground once
+                        Ground.tested = true;
+                        //Adds 1 to distance from previous ground
+                        Ground.length = 1 + g.length;
+                        //Adds next neihbor to the queue
+                        action.Enqueue(Ground);
+                    }
+                }
+            }
+        }
+    }
+
+    //Same as above function to find movable ground but with small modifications to be used and distinguished for combat
+    public void findCombatGround()
+    {
+        //Gets the selected ground and the list of neighbors
+        makeGroundList();
+        getSelectedGround();
+
+        //Going through the ground
+        Queue<Ground> action = new Queue<Ground>();
+
+        //Sends selected ground through queue and specifies not to go through it again
+        action.Enqueue(selectedGround);
+        selectedGround.tested = true;
+        //selectedGround.selected = null;
+
+        //Goes through ground while some can go through the queue
+        while (action.Count > 0)
+        {
+            //Gets ground at top of queue
+            Ground g = action.Dequeue();
+
+            //Adds current ground to the needed list and sets trait to change color
+            //moveableGround.Add(g);
+            g.combat = true;
+
+            //Goes through only when within range
+            if (g.length < combatRange)
+            {
+                //Adds neighbors to queue
+                foreach (Ground Ground in g.combatList)
                 {
                     //Ensures ground does not go through more than once
                     if (!Ground.tested)

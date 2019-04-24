@@ -26,6 +26,8 @@ public class Movement1 : SharedMovement
         {
             //Show the unit in its new position
             ShowMovement();
+            //Show the units range of attack
+            findCombatGround();
 
             //Pressing 0 ends the turn
             if (Input.GetKeyUp(KeyCode.Keypad0))
