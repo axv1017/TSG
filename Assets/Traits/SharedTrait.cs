@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class SharedTrait : MonoBehaviour
 {
     //Traits that will be shared by multiple units
@@ -19,5 +18,4 @@ public class SharedTrait : MonoBehaviour
         // Find distance between 2 units to determine if combat is possible
          distance = Vector3.Distance(Unit.transform.position, RivalUnit.transform.position);
     }
-
 }

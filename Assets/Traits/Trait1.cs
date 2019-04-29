@@ -32,7 +32,7 @@ public class Trait1 : MonoBehaviour
         //Check if team is empty, if it is display game over
         if (SharedTrait.team1 == 0)
         {
-            showText.text = "Game Over\nPlayer Team Wins\nPress Esc. to Exit\nPress Enter to Restart";
+            showText.text = "Game Over\nBlue Team Wins\nPress Esc. to Exit\nPress Enter to Restart";
         }
 
         if (Trait0.defeated == false)
@@ -45,7 +45,7 @@ public class Trait1 : MonoBehaviour
                     //Send info for combat into function
                     recieveDamage(Trait0.strength);
                     //Sets up text to be shown in gui
-                    showText.text = "Unit " + unitID + " Traits\nHP: " + updatedHP + "\nStrength: " + strength;
+                    showText.text = "Token " + (unitID + 1) + " Traits\nHP: " + updatedHP + "\nStrength: " + strength;
 
                     SharedMovement.turn+=0.5f;
                 }
@@ -53,12 +53,12 @@ public class Trait1 : MonoBehaviour
 
             if (Input.GetKey(KeyCode.Alpha2))
             {
-                showText.text = "Unit " + unitID + " Traits\nHP: " + updatedHP + "\nStrength: " + strength;
+                showText.text = "Token " + (unitID + 1) + " Traits\nHP: " + updatedHP + "\nStrength: " + strength;
             }
 
             if (Input.GetKey(KeyCode.Space))
             {
-                showText.text = "Press 1 for Player(Blue) Traits\n\nPress 2 for Rival(Red) Traits\n\nPress a keypad number to deal damage to the corresponding token\n\nPress 0 on the keypad to end turn after moving\n\nClick a highlighted space to move there\n\nPress Esc.to Exit\n\nPress Enter to Restart\n\nPress space to show this message again";
+                showText.text = "Click a highlighted space to move there\n\nPress Esc.to Exit\n\nPress Enter to Restart\n\nPress Space to show this message again";
             }
         }
     }
